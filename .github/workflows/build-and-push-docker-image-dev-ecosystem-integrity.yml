@@ -8,7 +8,7 @@ on:
   push:
     branches: [ main ]
     paths:
-    - dockerfiles/dev/ecosystem_integrity/0.6.1/Dockerfile
+    - dockerfiles/dev/ecosystem_integrity/0.1/Dockerfile
     
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: dockerfiles/dev/ecosystem_integrity/0.6.1/Dockerfile
+          file: dockerfiles/dev/ecosystem_integrity/0.1/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: biometrioearth/dev:0.6.1
+          tags: biometrioearth/dev:ecosystem_integrity_0.1
