@@ -20,9 +20,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && apt-get i
 RUN pip3 install $JUPYTERLAB
 
 RUN jupyter notebook --generate-config && \
-    sed -i "s/# c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:5c1fee0d2231:55836f6ad7c2796c139799dedf50d3e9d9058d2e'/" ~/.jupyter/jupyter_notebook_config.py && \
-    sed -i "s/# c.NotebookApp.certfile = .*/c.NotebookApp.certfile = u'\/shared_volume\/certs\/fullchain1.pem'/" ~/.jupyter/jupyter_notebook_config.py && \
-    sed -i "s/# c.NotebookApp.keyfile = .*/c.NotebookApp.keyfile = u'\/shared_volume\/certs\/privkey1.pem'/" ~/.jupyter/jupyter_notebook_config.py
+    sed -i "s/# c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:5c1fee0d2231:55836f6ad7c2796c139799dedf50d3e9d9058d2e'/" ~/.jupyter/jupyter_notebook_config.py
 
 #effectively load password and configs
 RUN cp ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_server_config.py
