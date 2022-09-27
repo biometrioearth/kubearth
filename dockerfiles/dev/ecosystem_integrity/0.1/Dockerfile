@@ -1,7 +1,8 @@
 FROM biometrioearth/dev:jupylab_base_0.1
 USER root
 ENV DEB_PACKAGES="python3-gdal graphviz graphviz-dev"
-ENV PIP_PACKAGES_COMMON="numpy matplotlib scipy pandas seaborn scikit-learn geopandas rasterio fiona awscli geojson pysal osmnx pyrosm geopy folium pandas-bokeh pygraphviz pgmpy causalnex"
+#ipywidgets is required by pgmpy
+ENV PIP_PACKAGES_COMMON="numpy matplotlib scipy pandas seaborn scikit-learn geopandas rasterio fiona awscli geojson pysal osmnx pyrosm geopy folium pandas-bokeh pygraphviz ipywidgets pgmpy causalnex"
 
 RUN apt-get update && apt-get install -y $DEB_PACKAGES
 
