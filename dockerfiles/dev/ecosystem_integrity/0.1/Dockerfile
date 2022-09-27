@@ -5,7 +5,7 @@ ENV PIP_PACKAGES_COMMON="numpy matplotlib scipy pandas seaborn scikit-learn geop
 
 RUN apt-get update && apt-get install -y $DEB_PACKAGES
 
-RUN sed -i "s/# c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
+RUN sed -i "s/c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
 
 #effectively load password and configs
 RUN cp ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_server_config.py
