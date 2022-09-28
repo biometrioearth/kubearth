@@ -13,6 +13,9 @@ RUN cp ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_server_config.py
 
 RUN pip install $PIP_PACKAGES_COMMON
 
+#pytorch, from: https://pytorch.org/get-started/locally/
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+
 VOLUME ["/shared_volume"]
 
 WORKDIR /
