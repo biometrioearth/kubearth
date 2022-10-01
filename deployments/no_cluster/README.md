@@ -1,5 +1,4 @@
-
-Set:
+# Set
 
 ```
 LOADBALANCER=loadbalancer.yaml
@@ -22,13 +21,13 @@ wget $URL/$PVC_EFS
 wget $URL/$JUPYTERLAB
 ```
 
-Create service:
+# Create service
 
 ```
 kubectl create -f $URL/$LOADBALANCER
 ```
 
-Create storage:
+# Create storage
 
 ```
 kubectl create -f $URL/$PV
@@ -36,11 +35,9 @@ kubectl create -f $URL/$PVC
 kubectl create -f $URL/$PV_EFS
 kubectl create -f $URL/$PVC_EFS
 ```
-For Jupyterlab:
+# Create Jupyterlab
 
-According to selected instance:
-
-Download yaml:
+According to selected instance. Download yaml:
 
 ```
 wget $URL/$JUPYTERLAB
@@ -48,13 +45,17 @@ wget $URL/$JUPYTERLAB
 
 ## If NO GPU
 
-Write docker image which will be in `jupyterlab.yaml`. For example:
+### Write docker image which will be in `jupyterlab.yaml`
+
+For example:
 
 ```
 sed -i "s/image: /image: biometrioearth\/dev:ecosystem_integrity_0.1/" $JUPYTERLAB
 ```
 
-Write CPU & memory. For example:
+### Write CPU & memory
+
+For example:
 
 ```
 sed -i "s/cpu:/cpu: 0.5/" $JUPYTERLAB
@@ -69,7 +70,9 @@ In addition of last writes in section **if no gpu**. Write:
 sed -i '/limits:/a\                                          nvidia.com\/gpu: 1' $JUPYTERLAB
 ```
 
-Create deployment:
+## Create deployment
+
+After last writes
 
 ```
 kubectl create -f $JUPYTERLAB
