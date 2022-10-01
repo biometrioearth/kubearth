@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+        name: kale-service-jupyterlab
+        namespace: kubeflow
+spec:
+        type: LoadBalancer
+        ports:
+                - port: 8888
+                  targetPort: 8888
+                  protocol: TCP
+                  nodePort: 30001 #select port of your preference
+        selector:
+                app: kale-jupyterlab-app
