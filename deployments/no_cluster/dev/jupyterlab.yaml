@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+        name: kale-jupyterlab
+        namespace: kubeflow
+spec:
+        replicas: 1 # This is the number of containers that are going to be deployed.
+        selector:
+                matchLabels:
+                        app: kale-jupyterlab-app
+        template:
+                metadata:
+                        labels:
+                                app: kale-jupyterlab-app
+                spec:
+                        containers: 
+                        - name: kale-jupyterlab
+                          imagePullPolicy: Always
+                          image: 
+                          ports:
+                                  - containerPort: 8888
+                          resources:
+                                  requests:
+                                          cpu:
+                                          memory: 
+                                  limits:
+                                          cpu:
+                                          memory:
+                          volumeMounts:
+                                  - name: hostpath-pv
+                                    mountPath: "/shared_volume"
+                                  - name: hostpath-pv-efs
+                                    mountPath: "/shared_volume_efs"
+                        volumes:
+                        - name: hostpath-pv
+                          persistentVolumeClaim:
+                                  claimName: hostpath-pvc
+                        - name: hostpath-pv-efs
+                          persistentVolumeClaim:
+                                  claimName: hostpath-pvc-efs
