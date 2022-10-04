@@ -20,16 +20,16 @@ spec:
                                   image: 
                                   ports:
                                           - containerPort: 8888
-                        resources:
-                                requests:
-                                        cpu:
-                                        memory: 
-                                limits:
-                                        cpu:
-                                        memory:
-                        volumeMounts:
-                                - name: hostpath-pv
-                                  mountPath: /shared_volume
+                                resources:
+                                        requests:
+                                                cpu:
+                                                memory: 
+                                        limits:
+                                                cpu:
+                                                memory:
+                                volumeMounts:
+                                        - name: hostpath-pv
+                                          mountPath: /shared_volume
                         volumes:
                                 - name: hostpath-pvc
                                   persistentVolumeClaim:
