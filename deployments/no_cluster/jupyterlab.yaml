@@ -23,7 +23,7 @@ spec:
                                 resources:
                                         requests:
                                                 cpu:
-                                                memory: 
+                                                memory:
                                         limits:
                                                 cpu:
                                                 memory:
