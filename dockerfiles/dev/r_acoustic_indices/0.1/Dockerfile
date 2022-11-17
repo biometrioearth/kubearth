@@ -4,7 +4,7 @@ ENV PIP_PACKAGES_R="rpy2"
 #next to avoid error when loading rpy2
 ENV LD_LIBRARY_PATH=/usr/local/lib/R/lib/
 #for add-apt-repository
-ENV DEB_BUILD_DEPS="software-properties-common"
+ENV DEB_BUILD_DEPS="software-properties-common gfortran libopenblas-dev"
 #for R
 ENV R_KEY="E298A3A825C0D65DFD57CBB651716619E084DAB9"
 ENV R_DEB_BUILD_DEPS="r-base libgit2-dev dirmngr libgmp3-dev libmpfr-dev libssl-dev libxml2-dev libcurl4-openssl-dev libfontconfig1-dev libharfbuzz-dev  libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev"
