@@ -8,6 +8,9 @@ RUN pip install -r /lib/conabio_ml_vision/conabio_ml/requirements.txt
 
 ENV PYTHONPATH=$PYTHONPATH:/lib/conabio_ml_vision:/lib/conabio_ml_vision/conabio_ml
 
+#overwrite password
+RUN sed -i "s/c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
+
 VOLUME ["/shared_volume"]
 
 WORKDIR /
