@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build-and-push-docker-image-dev-ecosystem-integrity:
+  build-and-push-docker-image-dev-acoustic_indices:
     runs-on: ubuntu-20.04
     steps:
       -
