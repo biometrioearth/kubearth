@@ -11,7 +11,7 @@ ENV R_DEB_BUILD_DEPS="r-base libgit2-dev dirmngr libgmp3-dev libmpfr-dev libssl-
 ENV R_SITE_LIBRARY="/usr/local/lib/R/site-library"
 ENV R_PACKAGES="var=\"seewave soundecology repr IRdisplay evaluate crayon pbdZMQ devtools uuid digest\""
 
-RUN apt-get install -y $DEB_BUILD_DEPS
+RUN apt-get update && apt-get install -y $DEB_BUILD_DEPS
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $R_KEY && \
     add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" && \
