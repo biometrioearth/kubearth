@@ -5,7 +5,9 @@ USER root
 #ipywidgets is required by pgmpy
 ENV PIP_PACKAGES_COMMON="scikit-maad"
 
-RUN sed -i "s/c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
+#--generate-config is not needed if at some point in the future FROM biometrioearth/dev:jupylab_base_0.1 is used
+RUN jupyter notebook --generate-config && \
+    sed -i "s/c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
 
 #effectively load password and configs
 RUN cp ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_server_config.py
