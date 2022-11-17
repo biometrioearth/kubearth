@@ -1,7 +1,9 @@
-FROM biometrioearth/dev:jupylab_base_0.1
+#FROM biometrioearth/dev:jupylab_base_0.1
+#next img is sipecam/audio-dgpi-kale-tensorflow-yuntu-dask-gpu-cert:0.6.1_alfresco
+FROM biometrioearth/dev:yuntu_0.6.1_alfresco
 USER root
 #ipywidgets is required by pgmpy
-ENV PIP_PACKAGES_COMMON="matplotlib psutil python-dotenv scikit-maad"
+ENV PIP_PACKAGES_COMMON="scikit-maad"
 
 RUN sed -i "s/c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
 
