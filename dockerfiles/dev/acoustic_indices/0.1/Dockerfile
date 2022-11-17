@@ -7,7 +7,7 @@ ENV PIP_PACKAGES_COMMON="scikit-maad"
 
 #regenerate config (next line because FROM biometrioearth/dev:yuntu_0.6.1_alfresco is used)
 RUN jupyter notebook --generate-config && \
-    sed -i "s/# c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
+    sed -i "s/#c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
 
 #overwrite password (if FROM biometrioearth/dev:jupylab_base_0.1 is used, uncomment next line)
 #RUN sed -i "s/c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:115e429a919f:21911277af52f3e7a8b59380804140d9ef3e2380'/" ~/.jupyter/jupyter_notebook_config.py
