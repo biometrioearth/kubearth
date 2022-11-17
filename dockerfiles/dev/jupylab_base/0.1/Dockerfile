@@ -1,4 +1,6 @@
-FROM ubuntu:20.04
+ARG img
+FROM $img
+RUN echo "Building from $img"
 USER root
 ENV TIMEZONE America/Mexico_City
 ENV LANG C.UTF-8
