@@ -5,11 +5,7 @@ name: jupylab-base-build-and-push
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ main ]
-    paths:
-    - dockerfiles/jupylab_base/0.1/Dockerfile
-    
+   
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
