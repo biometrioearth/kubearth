@@ -1,6 +1,6 @@
 #FROM biometrioearth/dev:jupylab_base_0.1
 #next img is sipecam/audio-dgpi-kale-tensorflow-yuntu-dask-gpu-cert:0.6.1_alfresco
-FROM biometrioearth/dev:yuntu_0.6.1_alfresco
+FROM biometrioearth/dev:yuntu_gpu_0.6.1_alfresco
 USER root
 
 ENV PIP_PACKAGES_COMMON="scikit-maad"
