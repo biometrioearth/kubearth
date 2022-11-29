@@ -9,7 +9,7 @@ ENV DEB_BUILD_DEPS="software-properties-common gfortran libopenblas-dev"
 ENV R_KEY="E298A3A825C0D65DFD57CBB651716619E084DAB9"
 ENV R_DEB_BUILD_DEPS="r-base libgit2-dev dirmngr libgmp3-dev libmpfr-dev libssl-dev libxml2-dev libcurl4-openssl-dev libfontconfig1-dev libharfbuzz-dev  libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev"
 ENV R_SITE_LIBRARY="/usr/local/lib/R/site-library"
-ENV R_PACKAGES="var=\"seewave soundecology repr IRdisplay evaluate crayon pbdZMQ devtools uuid digest\""
+ENV R_PACKAGES="var=\"seewave soundecology ggplot2 viridis repr IRdisplay evaluate crayon pbdZMQ devtools uuid digest\""
 
 RUN apt-get update && apt-get install -y $DEB_BUILD_DEPS
 
