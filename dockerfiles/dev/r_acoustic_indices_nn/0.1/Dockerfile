@@ -45,7 +45,7 @@ RUN echo $R_PACKAGES >  ~/.Renviron && \
     R -e 'install.packages(strsplit(system("echo $var", intern=TRUE)," ")[[1]], lib="/usr/local/lib/R/site-library/")' && \
     R -e 'devtools::install_github("IRkernel/IRkernel")' && \
     sudo R -e 'IRkernel::installspec(user=FALSE)' && \
-    R -e 'library(reticulate); virtualenv_create("r-reticulate", python = "/usr/bin/python3"); library(keras); install_keras(envname = "r-reticulate")' && \
+    R -e 'library(reticulate); virtualenv_create("r-reticulate", python = "/usr/bin/python3"); library(keras); install_keras(envname = "r-reticulate")'
     
 RUN sudo chmod gou+wx -R ~/.local
 
