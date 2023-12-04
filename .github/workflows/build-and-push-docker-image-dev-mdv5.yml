@@ -5,7 +5,7 @@ name: dev-mdv5-build-and-push
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-    
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: dockerfiles/dev/megadetector_v5/0.1/Dockerfile
+          file: dockerfiles/dev/megadetector_v5/0.2/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: biometrioearth/dev:megadetector_v5_0.1
+          tags: biometrioearth/dev:megadetector_v5_tf2.15
