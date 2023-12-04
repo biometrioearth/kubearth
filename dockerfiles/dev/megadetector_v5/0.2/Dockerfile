@@ -16,7 +16,7 @@ ENV PYTHON_EXEC=python
 
 RUN apt-get update && export $DEBIAN_FRONTEND && echo $TIMEZONE > /etc/timezone && apt-get install -y tzdata
 
-RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && pip3 install --upgrade pip && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
 RUN pip install $PIP_PACKAGES_COMMON
 RUN pip install $PIP_PACKAGES_TORCH
 RUN pip install $PIP_PACKAGES_TF_KERAS
