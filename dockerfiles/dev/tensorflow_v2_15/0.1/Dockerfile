@@ -11,6 +11,13 @@ ENV JUPYTERLAB="jupyter jupyterlab==3.4.3"
 ENV PIP_PACKAGES_TF_KERAS="keras_cv"
 ENV PYTHON_EXEC=python
 
+RUN apt-get update && export $DEBIAN_FRONTEND && echo $TIMEZONE > /etc/timezone && apt-get install -y tzdata
+
+RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
+RUN pip install $PIP_PACKAGES_COMMON
+RUN pip install $PIP_PACKAGES_TF_KERAS
+RUN pip install $JUPYTERLAB
+
 # Repos dependencies installation
 ENV CONABIO_ML=/lib/conabio_ml_vision
 RUN git clone -b dev https://bitbucket.org/conabio_cmd/conabio_ml_vision.git $CONABIO_ML
@@ -18,12 +25,6 @@ RUN git clone -b dev https://bitbucket.org/conabio_cmd/conabio_ml.git $CONABIO_M
 RUN pip install -r $CONABIO_ML/conabio_ml/requirements.txt
 RUN pip install -r $CONABIO_ML/requirements.txt
 
-RUN apt-get update && export $DEBIAN_FRONTEND && echo $TIMEZONE > /etc/timezone && apt-get install -y tzdata
-
-RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
-RUN pip install $PIP_PACKAGES_COMMON
-RUN pip install $PIP_PACKAGES_TF_KERAS
-RUN pip install $JUPYTERLAB
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && apt-get install -y nodejs
 
