@@ -43,7 +43,8 @@ RUN python3.10 -m pip install \
     termcolor==2.3.0 \
     tflite-runtime==2.14.0 \
     librosa==0.10.1 \
-    resampy==0.4.2
+    resampy==0.4.2 \
+    ebird-api==3.0.6
 
 # Append banner command to .bashrc
 RUN echo "clear; figlet 'be/AudioML' | lolcat; echo \"\"" >> /root/.bashrc
