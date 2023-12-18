@@ -44,7 +44,9 @@ RUN python3.10 -m pip install \
     tflite-runtime==2.14.0 \
     librosa==0.10.1 \
     resampy==0.4.2 \
-    ebird-api==3.0.6
+    ebird-api==3.0.6 \
+    tensorflow 
+
 
 # Append banner command to .bashrc
 RUN echo "clear; figlet 'be/AudioML' | lolcat; echo \"\"" >> /root/.bashrc
