@@ -45,6 +45,7 @@ RUN python3.10 -m pip install \
     librosa==0.10.1 \
     resampy==0.4.2 \
     ebird-api==3.0.6 \
+    scikit-maad==1.4.0 \
     tensorflow 
 
 
