@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-push-docker-image-dev-acoustic_indices:
+  build-and-push-docker-image-dev-audio_rstudio:
     runs-on: ubuntu-22.04
     steps:
       -
