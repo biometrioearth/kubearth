@@ -1,0 +1,9 @@
+FROM biometrioearth/dev:darksound_base_0.1
+
+# jupyterlab for testing
+RUN pip3 install jupyterlab
+EXPOSE 8888
+
+WORKDIR /workdir
+
+CMD ["jupyter-lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
