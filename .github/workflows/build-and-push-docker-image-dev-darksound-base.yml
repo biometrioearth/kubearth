@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: dev-ml-audio-base-build-and-push
+name: dev-darksound-base-build-and-push
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
