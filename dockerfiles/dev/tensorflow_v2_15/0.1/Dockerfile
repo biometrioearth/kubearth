@@ -13,10 +13,12 @@ ENV PYTHON_EXEC=python
 
 RUN apt-get update && export $DEBIAN_FRONTEND && echo $TIMEZONE > /etc/timezone && apt-get install -y tzdata
 
-RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
-RUN pip install $PIP_PACKAGES_COMMON
-RUN pip install $PIP_PACKAGES_TF_KERAS
-RUN pip install $JUPYTERLAB
+RUN alias python=python3
+
+RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && python -m pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
+RUN python -m pip install $PIP_PACKAGES_COMMON
+RUN python -m pip install $PIP_PACKAGES_TF_KERAS
+RUN python -m pip install $JUPYTERLAB
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && apt-get install -y nodejs
 
