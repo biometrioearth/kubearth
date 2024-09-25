@@ -4,7 +4,6 @@ ENV TIMEZONE America/Mexico_City
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-ENV DEB_BUILD_DEPS="python3-dev python3-pip python3-setuptools"
 ENV DEB_PACKAGES="sudo vim less git wget curl ca-certificates ffmpeg libsm6 libxext6"
 ENV PIP_PACKAGES_COMMON="jsonpickle humanfriendly PyYAML>=5.3.1"
 ENV JUPYTERLAB="jupyter jupyterlab==3.4.3"
@@ -12,8 +11,6 @@ ENV PIP_PACKAGES_TF_KERAS="keras_cv"
 ENV PYTHON_EXEC=python
 
 RUN apt-get update && export $DEBIAN_FRONTEND && echo $TIMEZONE > /etc/timezone && apt-get install -y tzdata
-
-RUN alias python=python3
 
 RUN apt-get install -y $DEB_PACKAGES && python -m pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
 RUN python -m pip install $PIP_PACKAGES_COMMON
