@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.15.0-gpu
+FROM tensorflow/tensorflow:2.17.0-gpu
 
 ENV TIMEZONE America/Mexico_City
 ENV LANG C.UTF-8
@@ -15,7 +15,7 @@ RUN apt-get update && export $DEBIAN_FRONTEND && echo $TIMEZONE > /etc/timezone 
 
 RUN alias python=python3
 
-RUN apt-get install -y $DEB_PACKAGES $DEB_BUILD_DEPS && python -m pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y $DEB_PACKAGES && python -m pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
 RUN python -m pip install $PIP_PACKAGES_COMMON
 RUN python -m pip install $PIP_PACKAGES_TF_KERAS
 RUN python -m pip install $JUPYTERLAB
