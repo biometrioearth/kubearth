@@ -37,4 +37,4 @@ jobs:
           file: dockerfiles/dev/tensorflow_v2_15/0.1/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: biometrioearth/dev:tf_v2.15_ml
+          tags: biometrioearth/dev:tf_v2.15

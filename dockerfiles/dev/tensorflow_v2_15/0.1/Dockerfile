@@ -18,14 +18,6 @@ RUN pip install $PIP_PACKAGES_COMMON
 RUN pip install $PIP_PACKAGES_TF_KERAS
 RUN pip install $JUPYTERLAB
 
-# Repos dependencies installation
-ENV CONABIO_ML=/lib/conabio_ml_vision
-RUN git clone -b dev https://bitbucket.org/conabio_cmd/conabio_ml_vision.git $CONABIO_ML
-RUN git clone -b dev https://bitbucket.org/conabio_cmd/conabio_ml.git $CONABIO_ML/conabio_ml
-RUN pip install -r $CONABIO_ML/conabio_ml/requirements.txt
-RUN pip install -r $CONABIO_ML/requirements.txt
-
-
 RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && apt-get install -y nodejs
 
 RUN jupyter notebook --generate-config && \
