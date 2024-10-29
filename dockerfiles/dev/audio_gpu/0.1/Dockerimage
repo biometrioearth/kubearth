@@ -10,7 +10,7 @@ ENV DEB_PACKAGES="sudo vim less git wget curl ca-certificates ffmpeg libsm6 libx
 ENV PIP_PACKAGES_COMMON="jsonpickle humanfriendly PyYAML>=5.3.1"
 ENV JUPYTERLAB="jupyter jupyterlab==3.4.3"
 ENV PIP_PACKAGES_TF_KERAS="keras_cv"
-ENV PIP_PACKAGES_AUDIO="torch==2.0.0+cu117 torchaudio==2.0.0 torchvision==0.15.1+cu117 python-dotenv==1.0.0 psycopg2-binary==2.9.6 scikit-maad>=1.3.12 scikit-image soundfile"
+ENV PIP_PACKAGES_AUDIO="python-dotenv==1.0.0 psycopg2-binary==2.9.6 scikit-maad>=1.3.12 scikit-image soundfile"
 ENV PYTHON_EXEC=python
 
 # Update and install essential packages
@@ -22,6 +22,9 @@ RUN pip install $PIP_PACKAGES_COMMON
 RUN pip install $PIP_PACKAGES_TF_KERAS
 RUN pip install $JUPYTERLAB
 RUN pip install $PIP_PACKAGES_AUDIO
+
+# Install compatible PyTorch, torchaudio, and torchvision with CUDA
+RUN pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.0 --extra-index-url https://download.pytorch.org/whl/cu118
 
 # Install Node.js for JupyterLab extensions
 RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && apt-get install -y nodejs
