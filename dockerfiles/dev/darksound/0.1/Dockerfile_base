@@ -60,13 +60,6 @@ RUN python3 -m pip install \
     hdbscan \
     --extra-index-url https://download.pytorch.org/whl/cu118
 
-# Install Bambird from GitHub
-RUN curl -L -o bambird.zip https://github.com/ear-team/bambird/archive/refs/heads/production.zip && \
-    unzip bambird.zip && \
-    rm bambird.zip && \
-    cd bambird-production && \
-    python3 -m pip install .
-
 # Install Darksound from GitHub
 RUN git clone https://github.com/ear-team/darksound.git /darksound
 ENV PYTHONPATH="/darksound:${PYTHONPATH}"
