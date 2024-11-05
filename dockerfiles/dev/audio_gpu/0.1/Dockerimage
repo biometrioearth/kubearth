@@ -1,5 +1,5 @@
 # Use the TensorFlow GPU image as the base
-FROM tensorflow/tensorflow:2.17.0-gpu
+FROM tensorflow/tensorflow:2.15.0-gpu
 
 # Environment settings
 ENV TIMEZONE America/Mexico_City
