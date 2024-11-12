@@ -23,11 +23,13 @@ RUN apt-get update && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip install opensoundscape
 # Configure Jupyter Notebook with a password be.audio
 RUN jupyter server --generate-config && \
     sed -i "s/# c.ServerApp.password = .*/c.ServerApp.password = u'sha1:e17a0046ad78:548694a1f0410973c4f78622aec3ea3253af0641'/" ~/.jupyter/jupyter_server_config.py && \
     jupyter notebook --generate-config && \
     sed -i "s/# c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:e17a0046ad78:548694a1f0410973c4f78622aec3ea3253af0641'/" ~/.jupyter/jupyter_notebook_config.py
+
 
 # Volume for sharing data
 VOLUME ["/shared_volume"]
