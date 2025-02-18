@@ -1,0 +1,39 @@
+# Use the official Python 3.12 slim image (Debian-based)
+FROM python:3.12-slim
+
+# Set environment variables
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    DEBIAN_FRONTEND=noninteractive \
+    TZ=Etc/UTC
+
+# Update system and install GDAL and build essentials
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      tzdata \
+      build-essential \
+      libgdal-dev \
+      gdal-bin && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Tell Python packages where to find gdal-config
+ENV GDAL_CONFIG=/usr/bin/gdal-config
+
+# Install the required Python packages: pandas, numpy, pyfiglet, and whombat
+RUN pip install --no-cache-dir \
+    pandas \
+    numpy \
+    pyfiglet \
+    whombat
+
+# Append banner command to .bashrc
+RUN echo "clear; figlet 'be/AudioML' | lolcat; echo \"\"" >> /root/.bashrc
+
+# Expose port 5000
+EXPOSE 5000
+
+# Set the working directory
+WORKDIR /workdir
+
+# Set the default command to launch your whombat app
+CMD ["python", "-m", "whombat"]
