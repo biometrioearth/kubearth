@@ -23,11 +23,7 @@ ENV GDAL_CONFIG=/usr/bin/gdal-config
 RUN pip install --no-cache-dir \
     pandas \
     numpy \
-    pyfiglet \
     whombat
-
-# Append banner command to .bashrc
-RUN echo "clear; figlet 'be/AudioML' | lolcat; echo \"\"" >> /root/.bashrc
 
 # Expose port 5000
 EXPOSE 5000
