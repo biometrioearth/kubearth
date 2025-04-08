@@ -1,0 +1,42 @@
+# Use the TensorFlow GPU image as the base
+FROM tensorflow/tensorflow:2.15.0-gpu
+
+# Environment settings
+ENV TIMEZONE America/Mexico_City
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEB_PACKAGES="sudo vim less git wget curl ca-certificates ffmpeg libsm6 libxext6"
+ENV PIP_PACKAGES_COMMON="jsonpickle humanfriendly PyYAML>=5.3.1"
+ENV JUPYTERLAB="jupyter jupyterlab==3.4.3"
+ENV PIP_PACKAGES_TF_KERAS="keras keras_cv"
+ENV PIP_PACKAGES_AUDIO="python-dotenv==1.0.0 psycopg2-binary==2.9.6 scikit-maad>=1.3.12 scikit-image soundfile librosa"
+ENV PYTHON_EXEC=python
+
+# Update and install essential packages and Python packages in a single layer
+RUN apt-get update && \
+    echo $TIMEZONE > /etc/timezone && \
+    apt-get install -y tzdata $DEB_PACKAGES && \
+    pip install --upgrade pip && \
+    pip install --no-cache-dir $PIP_PACKAGES_COMMON $PIP_PACKAGES_TF_KERAS $JUPYTERLAB $PIP_PACKAGES_AUDIO && \
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip install opensoundscape
+# Configure Jupyter Notebook with a password be.audio
+RUN jupyter server --generate-config && \
+    sed -i "s/# c.ServerApp.password = .*/c.ServerApp.password = u'sha1:e17a0046ad78:548694a1f0410973c4f78622aec3ea3253af0641'/" ~/.jupyter/jupyter_server_config.py && \
+    jupyter notebook --generate-config && \
+    sed -i "s/# c.NotebookApp.password = .*/c.NotebookApp.password = u'sha1:e17a0046ad78:548694a1f0410973c4f78622aec3ea3253af0641'/" ~/.jupyter/jupyter_notebook_config.py
+
+
+# Volume for sharing data
+VOLUME ["/shared_volume"]
+
+# Set working directory
+WORKDIR /
+
+# Set JupyterLab entry point
+ENV NB_PREFIX audio_processing
+ENTRYPOINT ["/usr/local/bin/jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--LabApp.allow_origin='*'", "--LabApp.base_url=audio"]

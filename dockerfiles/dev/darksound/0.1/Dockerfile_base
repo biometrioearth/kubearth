@@ -1,4 +1,5 @@
-FROM ubuntu:22.04
+# Start from NVIDIA's official CUDA image for Ubuntu 22.04 with compatible CUDA version
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
 # Set environment variables
 ENV LANG=C.UTF-8 \
@@ -6,17 +7,17 @@ ENV LANG=C.UTF-8 \
     DEBIAN_FRONTEND=noninteractive \
     TZ=Etc/UTC
 
-# Update and install packages
+# Update and install required packages
 RUN apt-get update && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     apt-get install -y tzdata sudo git curl wget figlet lolcat build-essential ffmpeg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Python 3.10, pip, and Python development headers
+# Install Python 3, pip, and Python development headers
 RUN apt-get update && \
-    apt-get install -y python3.10 python3.10-venv python3.10-distutils python3.10-dev && \
-    curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+    apt-get install -y python3 python3-venv python3-distutils python3-dev && \
+    curl -sS https://bootstrap.pypa.io/get-pip.py | python3
 
 # Install GDAL and its dependencies
 RUN apt-get update && \
@@ -28,8 +29,8 @@ RUN ln -s /usr/games/lolcat /usr/bin/lolcat
 # Set GDAL environment variable (if needed)
 ENV GDAL_CONFIG=/usr/bin/gdal-config
 
-# Install Python packages
-RUN python3.10 -m pip install \
+# Install Python packages with all specified dependencies and compatible versions
+RUN python3 -m pip install \
     birdnetlib==0.13.2 \
     geopy==2.4.0 \
     psycopg2-binary==2.9.6 \
@@ -44,28 +45,31 @@ RUN python3.10 -m pip install \
     ebird-api==3.0.6 \
     scikit-maad>=1.3.12 \
     scikit-image \
-    tensorflow \
+    tensorflow==2.15.0 \
+    keras \
+    numpy \
+    scipy \
+    soundfile \
+    audioread \
     codecarbon \
-    torch \
-    torchaudio \
-    torchvision \
+    torch==2.0.0 \
+    torchaudio==2.0.0 \
+    torchvision==0.15.0 \
     pandas==1.3.5 \
-    numpy==1.22 \
     geopandas \
-    hdbscan
-
-# Install Bambird from GitHub
-RUN curl -L -o bambird.zip https://github.com/ear-team/bambird/archive/refs/heads/production.zip && \
-    unzip bambird.zip && \
-    rm bambird.zip && \
-    cd bambird-production && \
-    python3.10 -m pip install .
+    hdbscan \
+    --extra-index-url https://download.pytorch.org/whl/cu118
 
 # Install Darksound from GitHub
 RUN git clone https://github.com/ear-team/darksound.git /darksound
-ENV PYTHONPATH="${PYTHONPATH}:/darksound"
+ENV PYTHONPATH="/darksound:${PYTHONPATH}"
 
 # Append banner command to .bashrc
 RUN echo "clear; figlet 'be/AudioML' | lolcat; echo \"\"" >> /root/.bashrc
 
+# Set the working directory
 WORKDIR /workdir
+
+# Ensure NVIDIA Container Toolkit is used for GPU support
+LABEL com.nvidia.volumes.needed="nvidia_driver"
+LABEL com.nvidia.cuda.version="11.8"
