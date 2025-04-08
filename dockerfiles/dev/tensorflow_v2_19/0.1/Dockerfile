@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.17.0-gpu
+FROM tensorflow/tensorflow:2.19.0-gpu
 
 ENV TIMEZONE America/Mexico_City
 ENV LANG C.UTF-8

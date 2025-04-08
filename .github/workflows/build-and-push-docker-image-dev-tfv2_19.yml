@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: dev-tf_v2_17-build-and-push
+name: dev-tf_v2_19-build-and-push
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: dockerfiles/dev/tensorflow_v2_17/0.1/Dockerfile
+          file: dockerfiles/dev/tensorflow_v2_19/0.1/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: biometrioearth/dev:tf_v2.17
+          tags: biometrioearth/dev:tf_v2.19
