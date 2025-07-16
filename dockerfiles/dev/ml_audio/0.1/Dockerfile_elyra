@@ -1,10 +1,20 @@
 FROM biometrioearth/dev:ml_audio_jupyterlab_0.1
 
-# jupyterlab for testing
+# 1. Install Elyra
 RUN pip3 install --upgrade "elyra[all]"
 
+# 2. Generate configs and inject your hash + base_url
+RUN jupyter server --generate-config && \
+    jupyter notebook --generate-config && \
+    sed -i "s|# c.ServerApp.password = .*|c.ServerApp.password = u'sha1:2eabcfc0:714c289fe3acd58a15295211a97b19e85341390f'|" /root/.jupyter/jupyter_server_config.py && \
+    sed -i "s|# c.ServerApp.base_url = .*|c.ServerApp.base_url = u'/audio'|" /root/.jupyter/jupyter_server_config.py && \
+    sed -i "s|# c.NotebookApp.password = .*|c.NotebookApp.password = u'sha1:2eabcfc0:714c289fe3acd58a15295211a97b19e85341390f'|" /root/.jupyter/jupyter_notebook_config.py && \
+    sed -i "s|# c.NotebookApp.base_url = .*|c.NotebookApp.base_url = u'/audio'|" /root/.jupyter/jupyter_notebook_config.py
+
+# 3. Expose port & mount
 EXPOSE 8888
+VOLUME ["/shared_volume"]
 
+# 4. Workdir & launch
 WORKDIR /workdir
-
-CMD ["jupyter-lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
